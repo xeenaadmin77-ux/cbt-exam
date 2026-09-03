@@ -1,0 +1,199 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Base user account profile and role tracking",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["student", "teacher", "admin"] },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["uid", "role", "createdAt"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student roster record with admission details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 100 },
+        "admissionNumber": { "type": "string", "maxLength": 50 },
+        "trade": { "type": "string", "maxLength": 80 },
+        "batch": { "type": "string", "maxLength": 50 },
+        "rollNumber": { "type": "string", "maxLength": 50 },
+        "role": { "type": "string", "enum": ["student"] },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["uid", "name", "admissionNumber", "role", "active"]
+    },
+    "Teacher": {
+      "title": "Teacher",
+      "description": "Teacher/Invigilator authorization profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["teacher", "admin"] },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["uid", "email", "role", "active"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "description": "Examination metadata, trade, duration, and scheduling",
+      "type": "object",
+      "properties": {
+        "examId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 500 },
+        "trade": { "type": "string", "maxLength": 80 },
+        "month": { "type": "string", "maxLength": 50 },
+        "durationMinutes": { "type": "number" },
+        "enablePerQuestionTimer": { "type": "boolean" },
+        "perQuestionTimerSeconds": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "passPercentage": { "type": "number" },
+        "published": { "type": "boolean" },
+        "showResultImmediately": { "type": "boolean" },
+        "resultsPublished": { "type": "boolean" },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["examId", "title", "durationMinutes", "totalMarks", "published"]
+    },
+    "Question": {
+      "title": "Question",
+      "description": "Question definition with options and server-protected correct answer",
+      "type": "object",
+      "properties": {
+        "questionId": { "type": "string", "maxLength": 128 },
+        "examId": { "type": "string", "maxLength": 128 },
+        "questionSet": { "type": "string", "maxLength": 50 },
+        "questionText": { "type": "string", "maxLength": 2000 },
+        "optionA": { "type": "string", "maxLength": 500 },
+        "optionB": { "type": "string", "maxLength": 500 },
+        "optionC": { "type": "string", "maxLength": 500 },
+        "optionD": { "type": "string", "maxLength": 500 },
+        "correctAnswer": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "marks": { "type": "number" },
+        "timeLimitSeconds": { "type": "number" }
+      },
+      "required": ["questionId", "examId", "questionText", "optionA", "optionB", "optionC", "optionD", "correctAnswer", "marks"]
+    },
+    "ExamSession": {
+      "title": "ExamSession",
+      "description": "Student's secure examination instance with server-authoritative timer and random order",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string", "maxLength": 128 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "admissionNumber": { "type": "string", "maxLength": 50 },
+        "studentName": { "type": "string", "maxLength": 100 },
+        "examId": { "type": "string", "maxLength": 128 },
+        "startTime": { "type": "number" },
+        "expiryTime": { "type": "number" },
+        "status": { "type": "string", "enum": ["in_progress", "submitted", "expired", "terminated"] },
+        "questionOrder": { "type": "array", "items": { "type": "string" } },
+        "answers": { "type": "object" },
+        "markedQuestions": { "type": "array", "items": { "type": "string" } },
+        "submittedAt": { "type": "number" },
+        "terminatedReason": { "type": "string", "maxLength": 200 }
+      },
+      "required": ["sessionId", "studentUid", "examId", "startTime", "expiryTime", "status"]
+    },
+    "Result": {
+      "title": "Result",
+      "description": "Server-evaluated grade record",
+      "type": "object",
+      "properties": {
+        "resultId": { "type": "string", "maxLength": 128 },
+        "sessionId": { "type": "string", "maxLength": 128 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 100 },
+        "admissionNumber": { "type": "string", "maxLength": 50 },
+        "examId": { "type": "string", "maxLength": 128 },
+        "examTitle": { "type": "string", "maxLength": 150 },
+        "score": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "percentage": { "type": "number" },
+        "passed": { "type": "boolean" },
+        "submittedAt": { "type": "number" },
+        "isAutoExpired": { "type": "boolean" },
+        "resultsPublished": { "type": "boolean" }
+      },
+      "required": ["resultId", "sessionId", "studentUid", "examId", "score", "totalMarks", "percentage", "submittedAt"]
+    },
+    "CollegeSettings": {
+      "title": "CollegeSettings",
+      "description": "Public branding parameters",
+      "type": "object",
+      "properties": {
+        "collegeName": { "type": "string", "maxLength": 200 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "labName": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["collegeName"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Security and anti-cheating audit trail",
+      "type": "object",
+      "properties": {
+        "logId": { "type": "string", "maxLength": 128 },
+        "sessionId": { "type": "string", "maxLength": 128 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "examId": { "type": "string", "maxLength": 128 },
+        "eventType": { "type": "string", "maxLength": 100 },
+        "details": { "type": "string", "maxLength": 1000 },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["logId", "eventType", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User role index"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Authorized student roster"
+    },
+    "/teachers/{teacherId}": {
+      "schema": "Teacher",
+      "description": "Authorized faculty roster"
+    },
+    "/exams/{examId}": {
+      "schema": "Exam",
+      "description": "Exam definitions and schedule"
+    },
+    "/exams/{examId}/questions/{questionId}": {
+      "schema": "Question",
+      "description": "Questions with server-held correct answers"
+    },
+    "/examSessions/{sessionId}": {
+      "schema": "ExamSession",
+      "description": "Active and completed student exam sessions"
+    },
+    "/results/{resultId}": {
+      "schema": "Result",
+      "description": "Evaluated exam results"
+    },
+    "/settings/college_config": {
+      "schema": "CollegeSettings",
+      "description": "Public institution and lab parameters"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Lab invigilation audit events"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "ITI College CBT Examination System",
+  "description": "Production-ready Computer Based Test examination web application for XEENA INSTITUTE OF SKILL DEVELOPMENT computer labs with server-side question evaluation, randomized testing, anti-cheat detection, and teacher-released results.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
