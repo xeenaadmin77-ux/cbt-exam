@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Examination - ITI CBT Portal</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/teacher.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="teacher-navbar">
+    <div class="teacher-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div><strong style="font-size: 15px;">XEENA CBT FACULTY</strong></div>
+    </div>
+    <ul class="teacher-nav-links">
+      <li><a href="teacher-dashboard.html">Overview</a></li>
+      <li><a href="exam-create.html" class="active">+ New Exam</a></li>
+      <li><a href="question-manager.html">Questions</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="students-manager.html">Students</a></li>
+      <li><a href="settings.html">Lab Settings</a></li>
+    </ul>
+    <div>
+      <button id="teacherLogoutBtn" class="btn btn-sm btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border: none;">Logout</button>
+    </div>
+  </nav>
+
+  <div class="teacher-wrapper" style="max-width: 800px;">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Create New Examination</h1>
+        <p>Define test parameters, duration, pass criteria, and timing rules</p>
+      </div>
+      <div>
+        <a href="teacher-dashboard.html" class="btn btn-secondary">← Back to Overview</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form id="createExamForm">
+        <div class="form-group">
+          <label class="form-label" for="examTitle">Exam Title</label>
+          <input type="text" id="examTitle" class="form-control" placeholder="e.g. Monthly CBT Test - Computer Operator & Programming Assistant" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="examDescription">Exam Instructions / Description</label>
+          <textarea id="examDescription" class="form-control" rows="3" placeholder="Enter instructions for candidates..."></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label" for="examTrade">ITI Trade / Branch</label>
+            <input type="text" id="examTrade" class="form-control" placeholder="e.g. COPA, Electrician, Fitter" value="COPA" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="examMonth">Exam Month / Session</label>
+            <input type="text" id="examMonth" class="form-control" placeholder="e.g. September 2026" value="September 2026" required />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label" for="examDuration">Total Duration (Minutes)</label>
+            <input type="number" id="examDuration" class="form-control" min="1" max="300" value="45" required />
+            <span class="form-hint">Server-enforced timer. Once expired, test auto-submits.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="examPassMark">Pass Percentage (%)</label>
+            <input type="number" id="examPassMark" class="form-control" min="1" max="100" value="40" required />
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px; padding: 16px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <div class="form-check" style="margin-bottom: 12px;">
+            <input type="checkbox" id="showResultImmediately" />
+            <label for="showResultImmediately" style="font-weight: 600; font-size: 14px;">
+              Publish Results Instantly Upon Submission
+            </label>
+            <div style="font-size: 12px; color: var(--text-muted); margin-left: 24px;">
+              If unchecked, students will receive a verified submission receipt and results will be released when teacher toggles 'Release Results'.
+            </div>
+          </div>
+
+          <div class="form-check" style="margin-bottom: 8px;">
+            <input type="checkbox" id="enablePerQuestionTimer" />
+            <label for="enablePerQuestionTimer" style="font-weight: 600; font-size: 14px;">
+              Enable Per-Question Timer Mode
+            </label>
+            <div style="font-size: 12px; color: var(--text-muted); margin-left: 24px;">
+              Forces question auto-advance after specified seconds per question.
+            </div>
+          </div>
+
+          <div id="perQuestionTimerWrap" style="margin-left: 24px; margin-top: 8px;">
+            <label class="form-label" for="perQuestionTimerSeconds" style="font-size: 13px;">Seconds per question:</label>
+            <input type="number" id="perQuestionTimerSeconds" class="form-control" style="width: 140px;" value="60" min="5" max="300" />
+          </div>
+
+          <div class="form-check" style="margin-top: 14px;">
+            <input type="checkbox" id="examPublished" checked />
+            <label for="examPublished" style="font-weight: 600; font-size: 14px;">
+              Publish Exam (Make visible to registered students immediately)
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" id="saveExamBtn" class="btn btn-primary btn-lg btn-block">
+          Save Exam &amp; Proceed to Add Questions ➔
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/teacher.js"></script>
+</body>
+</html>

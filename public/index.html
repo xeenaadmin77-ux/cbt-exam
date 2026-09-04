@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITI College CBT Examination System</title>
+  <meta name="description" content="Production-ready Computer Based Test examination web application for ITI college computer labs with server-side question evaluation, randomized testing, anti-cheat detection, and mobile Termux deployment." />
+  <meta property="og:title" content="ITI College CBT Examination System" />
+  <meta property="og:description" content="Production-ready Computer Based Test examination web application for ITI college computer labs with server-side question evaluation, randomized testing, anti-cheat detection, and mobile Termux deployment." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <!-- Top College Navigation -->
+  <header class="top-bar">
+    <div class="college-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div class="college-titles">
+        <h1 class="college-name-display">XEENA INSTITUTE OF SKILL DEVELOPMENT</h1>
+        <p class="lab-name-display">Computer Based Test (CBT) Examination Lab</p>
+      </div>
+    </div>
+    <div class="lab-info-pill">
+      <span>● Lab Terminal Active</span>
+    </div>
+  </header>
+
+  <!-- Main Landing Container -->
+  <main class="auth-wrapper">
+    <div class="auth-card" style="max-width: 540px;">
+      <div class="auth-card-header">
+        <div class="auth-icon">🏛️</div>
+        <h2>CBT Examination Portal</h2>
+        <p>Industrial Training Institute Online Testing System</p>
+      </div>
+      <div class="auth-card-body">
+        <div class="auth-notice">
+          <div class="auth-notice-icon">ℹ️</div>
+          <div>
+            <strong>Laboratory Guidelines:</strong>
+            <p style="margin-top: 4px; font-size: 13px;">
+              Please verify your assigned computer lab terminal. All tests are timed server-side with automated question randomization and answer auto-save.
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <a href="student-login.html" class="btn btn-primary btn-lg" style="text-decoration: none; justify-content: flex-start; padding: 16px 20px;">
+            <span style="font-size: 22px;">🎓</span>
+            <div style="text-align: left;">
+              <div style="font-size: 16px; font-weight: 700;">Student Examination Login</div>
+              <div style="font-size: 12px; font-weight: normal; opacity: 0.85;">Login using your Name &amp; Admission Form Number</div>
+            </div>
+          </a>
+
+          <a href="teacher-login.html" class="btn btn-secondary btn-lg" style="text-decoration: none; justify-content: flex-start; padding: 16px 20px; border-color: var(--border-strong);">
+            <span style="font-size: 22px;">👨‍🏫</span>
+            <div style="text-align: left;">
+              <div style="font-size: 16px; font-weight: 700;">Teacher &amp; Invigilator Portal</div>
+              <div style="font-size: 12px; font-weight: normal; color: var(--text-muted);">Manage exams, question bank, results &amp; lab settings</div>
+            </div>
+          </a>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); text-align: center;">
+          Optimized for Windows Computer Labs &bull; Lightweight Mobile Administration via Termux / Acode
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/firebase-config.js"></script>
+</body>
+</html>

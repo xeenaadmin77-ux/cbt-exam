@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Question Bank Manager - ITI CBT Portal</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/teacher.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="teacher-navbar">
+    <div class="teacher-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div><strong style="font-size: 15px;">XEENA CBT FACULTY</strong></div>
+    </div>
+    <ul class="teacher-nav-links">
+      <li><a href="teacher-dashboard.html">Overview</a></li>
+      <li><a href="exam-create.html">+ New Exam</a></li>
+      <li><a href="question-manager.html" class="active">Questions</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="students-manager.html">Students</a></li>
+      <li><a href="settings.html">Lab Settings</a></li>
+    </ul>
+    <div>
+      <button id="teacherLogoutBtn" class="btn btn-sm btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border: none;">Logout</button>
+    </div>
+  </nav>
+
+  <div class="teacher-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Question Bank &amp; Test Paper Builder</h1>
+        <p>Add, edit, and organize multiple-choice questions for examination papers</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <label for="examSelector" style="font-size: 13px; font-weight: 700;">Select Test Paper:</label>
+        <select id="examSelector" class="form-control" style="width: auto; min-width: 260px;">
+          <!-- Dynamically populated -->
+        </select>
+      </div>
+    </div>
+
+    <!-- Add Question Form Card -->
+    <div class="form-card">
+      <h2 style="font-size: 18px; margin-bottom: 16px; color: var(--primary);">
+        + Add New Question to Selected Exam
+      </h2>
+      <form id="addQuestionForm">
+        <div class="form-group">
+          <label class="form-label" for="questionText">Question Description / Statement</label>
+          <textarea id="questionText" class="form-control" rows="3" placeholder="Enter question text here..." required></textarea>
+        </div>
+
+        <div class="options-builder">
+          <div class="option-input-wrap">
+            <span class="option-tag-label">Option A</span>
+            <input type="text" id="optionA" class="form-control" placeholder="Option A text" required />
+          </div>
+          <div class="option-input-wrap">
+            <span class="option-tag-label">Option B</span>
+            <input type="text" id="optionB" class="form-control" placeholder="Option B text" required />
+          </div>
+          <div class="option-input-wrap">
+            <span class="option-tag-label">Option C</span>
+            <input type="text" id="optionC" class="form-control" placeholder="Option C text" required />
+          </div>
+          <div class="option-input-wrap">
+            <span class="option-tag-label">Option D</span>
+            <input type="text" id="optionD" class="form-control" placeholder="Option D text" required />
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label class="form-label" for="correctAnswer">Correct Answer</label>
+            <select id="correctAnswer" class="form-control" required style="font-weight: 700; color: var(--success);">
+              <option value="A">Option A</option>
+              <option value="B">Option B</option>
+              <option value="C">Option C</option>
+              <option value="D">Option D</option>
+            </select>
+            <span class="form-hint">Stored strictly server-side. Never sent to student client.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="questionMarks">Marks Awarded</label>
+            <input type="number" id="questionMarks" class="form-control" value="2" min="1" max="100" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="questionSet">Question Set Group</label>
+            <select id="questionSet" class="form-control">
+              <option value="Set A">Set A</option>
+              <option value="Set B">Set B</option>
+              <option value="Set C">Set C</option>
+              <option value="General">General / All</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="timeLimitSeconds">Per-Question Timer (sec)</label>
+            <input type="number" id="timeLimitSeconds" class="form-control" value="0" min="0" max="600" />
+            <span class="form-hint">0 = inherits overall exam timer</span>
+          </div>
+        </div>
+
+        <button type="submit" id="addQuestionBtn" class="btn btn-primary btn-lg">
+          Add Question to Exam
+        </button>
+      </form>
+    </div>
+
+    <!-- Question List -->
+    <div class="data-table-card">
+      <div class="data-table-header">
+        <h2>Existing Questions in Exam</h2>
+        <span class="badge badge-primary" id="totalQuestionsCountBadge">0 Questions</span>
+      </div>
+      <div style="padding: 20px;" id="questionListContainer">
+        <!-- Rendered by teacher.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/teacher.js"></script>
+</body>
+</html>

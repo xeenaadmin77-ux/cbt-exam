@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard - ITI CBT Portal</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="top-bar">
+    <div class="college-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div class="college-titles">
+        <h1 class="college-name-display">XEENA INSTITUTE OF SKILL DEVELOPMENT</h1>
+        <p class="lab-name-display">Computer Based Test (CBT) Examination Lab</p>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button id="studentLogoutBtn" class="btn btn-sm btn-secondary">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-wrapper">
+    <!-- Student Profile Banner -->
+    <div class="profile-card">
+      <div class="profile-avatar" id="profileAvatar">S</div>
+      <div class="profile-info">
+        <h2 id="profileStudentName">Student Name</h2>
+        <div class="profile-meta">
+          <span id="profileAdmissionNumber">Admission No: --</span>
+          <span id="profileTrade">Trade: ITI General</span>
+          <span class="badge badge-success">✓ Verified Lab Candidate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Scheduled Exams -->
+    <div class="section-title">
+      <h3>Assigned &amp; Available Computer Lab Examinations</h3>
+      <span class="badge badge-primary">Current Session</span>
+    </div>
+
+    <div id="noExamsNotice" class="alert alert-info" style="display: none; text-align: center; padding: 32px;">
+      <h4>No Active Examinations Scheduled</h4>
+      <p style="margin-top: 6px; color: var(--text-muted);">
+        There are currently no active tests published for your trade. Please wait for the lab invigilator's instruction.
+      </p>
+    </div>
+
+    <div class="exam-grid" id="availableExamsGrid">
+      <!-- Dynamically populated by student.js -->
+    </div>
+  </main>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>

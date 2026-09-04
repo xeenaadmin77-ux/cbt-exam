@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examination Results &amp; Reports - ITI CBT Portal</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/teacher.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="teacher-navbar">
+    <div class="teacher-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div><strong style="font-size: 15px;">XEENA CBT FACULTY</strong></div>
+    </div>
+    <ul class="teacher-nav-links">
+      <li><a href="teacher-dashboard.html">Overview</a></li>
+      <li><a href="exam-create.html">+ New Exam</a></li>
+      <li><a href="question-manager.html">Questions</a></li>
+      <li><a href="results.html" class="active">Results</a></li>
+      <li><a href="students-manager.html">Students</a></li>
+      <li><a href="settings.html">Lab Settings</a></li>
+    </ul>
+    <div>
+      <button id="teacherLogoutBtn" class="btn btn-sm btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border: none;">Logout</button>
+    </div>
+  </nav>
+
+  <div class="teacher-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Examination Results &amp; Student Scorecards</h1>
+        <p>Authoritative server evaluations, pass/fail status, and CSV report export</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button type="button" class="btn btn-success" id="exportCsvBtn">
+          📥 Export Filtered Results to CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Student Scorecard Performance Summary Cards -->
+    <div class="stat-grid" style="margin-bottom: 20px;">
+      <div class="stat-card">
+        <div class="stat-icon blue">📋</div>
+        <div class="stat-info">
+          <div class="stat-value" id="kpiTotalSubmissions">0</div>
+          <div class="stat-label">Total Submissions</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">🏆</div>
+        <div class="stat-info">
+          <div class="stat-value" id="kpiPassedCount">0</div>
+          <div class="stat-label" id="kpiPassRate">Pass Rate: 0%</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amber">📊</div>
+        <div class="stat-info">
+          <div class="stat-value" id="kpiAvgScore">0</div>
+          <div class="stat-label">Average Batch Score</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">⭐</div>
+        <div class="stat-info">
+          <div class="stat-value" id="kpiTopScorer" style="font-size: 16px; word-break: break-word;">--</div>
+          <div class="stat-label">Top Lab Candidate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Release Control Bar -->
+    <div style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 20px; box-shadow: var(--shadow-sm);">
+      <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+        <span>📢</span> Exam Result Publication Controls (Release scorecards to student dashboards):
+      </div>
+      <div id="examReleaseToggles" style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <!-- Populated dynamically by teacher.js -->
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div style="background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;">
+      <div style="display: flex; flex: 1; min-width: 280px; gap: 10px;">
+        <input type="text" id="searchResultInput" class="form-control" placeholder="Search candidate name, admission number, or exam title..." />
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label for="monthFilterSelect" style="font-size: 13px; font-weight: 600;">Month:</label>
+          <select id="monthFilterSelect" class="form-control" style="width: 160px;">
+            <option value="ALL">All Months</option>
+            <option value="September 2026">September 2026</option>
+            <option value="August 2026">August 2026</option>
+            <option value="July 2026">July 2026</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <label for="tradeFilterSelect" style="font-size: 13px; font-weight: 600;">Trade:</label>
+          <select id="tradeFilterSelect" class="form-control" style="width: 150px;">
+            <option value="ALL">All Trades</option>
+            <option value="COPA">COPA</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Fitter">Fitter</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Table -->
+    <div class="data-table-card">
+      <div class="data-table-header">
+        <h2>Student Examination Records</h2>
+        <span class="badge badge-primary" id="resultsCountBadge">0 Submissions</span>
+      </div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Admission Form No</th>
+              <th>Exam Title &amp; Session</th>
+              <th>Score Obtained</th>
+              <th>Status</th>
+              <th>Submission Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTableBody">
+            <tr><td colspan="7" style="text-align:center; padding: 24px;">Loading examination records...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/teacher.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Settings &amp; Security - ITI CBT Portal</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/teacher.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="teacher-navbar">
+    <div class="teacher-brand">
+      <img src="images/xeena_logo.png" alt="XEENA Institute Logo" class="college-logo-img" />
+      <div><strong style="font-size: 15px;">XEENA CBT FACULTY</strong></div>
+    </div>
+    <ul class="teacher-nav-links">
+      <li><a href="teacher-dashboard.html">Overview</a></li>
+      <li><a href="exam-create.html">+ New Exam</a></li>
+      <li><a href="question-manager.html">Questions</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="students-manager.html">Students</a></li>
+      <li><a href="settings.html" class="active">Lab Settings</a></li>
+    </ul>
+    <div>
+      <button id="teacherLogoutBtn" class="btn btn-sm btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border: none;">Logout</button>
+    </div>
+  </nav>
+
+  <div class="teacher-wrapper" style="max-width: 900px;">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Laboratory Settings &amp; Security Controls</h1>
+        <p>Configure institutional branding, invigilator exit password, and review security audit logs</p>
+      </div>
+      <div>
+        <a href="teacher-dashboard.html" class="btn btn-secondary">← Back to Overview</a>
+      </div>
+    </div>
+
+    <!-- Institutional Settings Card -->
+    <div class="form-card">
+      <h2 style="font-size: 18px; margin-bottom: 16px; color: var(--primary);">
+        College Branding &amp; Computer Lab Configuration
+      </h2>
+      <form id="collegeSettingsForm">
+        <div class="form-group">
+          <label class="form-label" for="cfgCollegeName">College / Institute Name</label>
+          <input type="text" id="cfgCollegeName" class="form-control" required />
+          <span class="form-hint">Displayed across student and invigilator headers.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cfgTagline">Institutional Tagline</label>
+          <input type="text" id="cfgTagline" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cfgLabName">Computer Lab Room Identifier</label>
+          <input type="text" id="cfgLabName" class="form-control" placeholder="e.g. Lab Terminal Room 1" />
+        </div>
+
+        <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 18px; border-radius: var(--radius-md); margin-bottom: 20px;">
+          <h3 style="font-size: 15px; color: var(--danger); margin-bottom: 6px;">
+            🔐 Invigilator Early Exit Authorization Password
+          </h3>
+          <p style="font-size: 13px; color: #7f1d1d; margin-bottom: 12px;">
+            This password is required by a teacher if a student needs to exit or close an exam before the timer expires. Keep this confidential.
+          </p>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="cfgExitPassword" style="color: #7f1d1d;">New Exit Password (leave blank to keep current):</label>
+            <input type="password" id="cfgExitPassword" class="form-control" placeholder="Enter secure invigilator exit password" autocomplete="new-password" />
+          </div>
+        </div>
+
+        <button type="submit" id="saveSettingsBtn" class="btn btn-primary btn-lg">
+          Save Configuration
+        </button>
+      </form>
+    </div>
+
+    <!-- Security Audit Logs Card -->
+    <div class="data-table-card">
+      <div class="data-table-header">
+        <h2>Laboratory Security &amp; Cheating Audit Log</h2>
+        <span class="badge badge-warning">Live Invigilator Log</span>
+      </div>
+      <div class="table-responsive">
+        <table class="custom-table" style="font-size: 13px;">
+          <thead>
+            <tr>
+              <th>Security Event</th>
+              <th>Candidate</th>
+              <th>Session ID</th>
+              <th>Details</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="auditLogsTableBody">
+            <tr><td colspan="5" style="text-align:center; padding: 20px;">Loading audit logs...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/teacher.js"></script>
+</body>
+</html>
