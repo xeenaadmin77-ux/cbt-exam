@@ -23,11 +23,14 @@ let adminAuth, db;
 try {
   const { getFirestore } = require("firebase-admin/firestore");
   const { getAuth } = require("firebase-admin/auth");
-  if (!admin.getApps || !admin.getApps().length) {
+    if (!admin.getApps || !admin.getApps().length) {
     try {
-      admin.initializeApp();
+      const serviceAccount = require("./firebase-key.json");
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+      });
     } catch (initErr) {
-      admin.initializeApp({ projectId: process.env.GCLOUD_PROJECT || "iti-cbt-portal" });
+      admin.initializeApp();
     }
   }
   db = typeof getFirestore === "function" ? getFirestore() : (admin.firestore ? admin.firestore() : null);
