@@ -6,17 +6,18 @@
 // Firebase Project Configuration
 // Replace with your Firebase Web project credentials if using client SDK directly:
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA05VWC2yLWpYcA5deQHwQyiInUwk9FgZQ",
+  authDomain: "cbt-exam7.firebaseapp.com",
+  projectId: "cbt-exam7",
+  storageBucket: "cbt-exam7.firebasestorage.app",
+  messagingSenderId: "18072481987",
+  appId: "1:18072481987:web:aa7525a096c9e86e07b276",
 };
 
 // Authoritative API Base URL:
 // In Firebase Hosting, rewrites map '/api/**' to the 'api' Cloud Function.
-const API_BASE = '/api';
+const API_BASE = 'https://cbt-exam-0x8e.onrender.com/api';
+
 
 /**
  * Robust API helper attaching verified Firebase ID token as Bearer header.
