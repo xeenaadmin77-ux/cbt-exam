@@ -1,0 +1,76 @@
+/* Authentication Styles - Student & Teacher Login */
+.auth-wrapper {
+  min-height: calc(100vh - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+}
+.auth-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 440px;
+  overflow: hidden;
+}
+.auth-card-header {
+  background: #ffffff;
+  padding: 24px 28px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.auth-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 24px;
+}
+.auth-card-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.auth-card-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.auth-card-body {
+  padding: 24px 28px;
+}
+.auth-notice {
+  background: #f1f5f9;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #334155;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.auth-notice-icon {
+  font-size: 16px;
+  color: var(--primary);
+  margin-top: 1px;
+}
+.auth-footer-links {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.auth-footer-links a {
+  font-weight: 600;
+}
