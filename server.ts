@@ -27,7 +27,7 @@ async function startServer() {
   // Import the single source of truth Express app from functions/index.js
   let functionsApp;
   try {
-    const functionsModule = require('./functions/index.js');
+    const functionsModule = require('../functions/index.js');
     functionsApp = functionsModule.app;
   } catch (err) {
     console.warn('[DEV SERVER] Could not load functions/index.js directly:', (err as Error).message);
