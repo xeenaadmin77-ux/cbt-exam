@@ -21,7 +21,8 @@ const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
+
 
   // Import the single source of truth Express app from functions/index.js
   let functionsApp;
